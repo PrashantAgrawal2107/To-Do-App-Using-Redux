@@ -6,7 +6,7 @@ import { toggleTodo } from "../../redux/actions/todoActions";
 function ToDoList() {
 
   // const todos = store.getState().todos  // It is allowed but not preffered way...
-  const todos = useSelector((state)=>state.todos);
+  const todos = useSelector((state)=>state.todo.todos);
   const dispatch = useDispatch();
 
   return (
