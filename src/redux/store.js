@@ -4,6 +4,7 @@ import { todoReducer } from './reducers/todoReducer';
 // import { combineReducers } from 'redux';
 import { noteReducer } from './reducers/noteReducer';
 import { configureStore } from '@reduxjs/toolkit';
+import { notificationReducer } from './reducers/notificationReducer';
 
 // const result = combineReducers({
 //     todo : todoReducer,
@@ -16,6 +17,7 @@ import { configureStore } from '@reduxjs/toolkit';
 export const store  = configureStore({
     reducer : {
         todo : todoReducer,
-        note : noteReducer
+        note : noteReducer,
+        notification : notificationReducer
     }
 })
