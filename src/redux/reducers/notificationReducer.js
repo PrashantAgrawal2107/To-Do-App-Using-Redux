@@ -32,5 +32,5 @@ const notificationSlice = createSlice({
 })
 
 export const notificationReducer = notificationSlice.reducer;
-export const notificationSelector = (state) => state.notification.message
+export const notificationSelector = (state) => state.notification.message // notification refers to the reducer definition in store.js
 export const resetNotificattion = notificationSlice.actions.reset;

@@ -34,7 +34,7 @@ const todoSlice = createSlice({
 export const todoReducer = todoSlice.reducer;
 export const todoActions = todoSlice.actions;
 
-export const todoSelector = (state) => state.todo.todos;
+export const todoSelector = (state) => state.todo.todos; // todo refers to the todoSelector defined as todo in store.js
 
 // export function todoReducer(state = initialState , action){
   

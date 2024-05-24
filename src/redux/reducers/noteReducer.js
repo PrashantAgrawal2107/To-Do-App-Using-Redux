@@ -25,7 +25,7 @@ export const noteReducer = noteSlice.reducer;
 export const noteActions = noteSlice.actions;
 
 
-export const noteSelector = (state) => state.note.notes;
+export const noteSelector = (state) => state.note.notes; // note refers to the noteReducer defined as note in store.js
 // export function noteReducer(state=initialState , action){
 
 //     switch(action.type){
