@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 // import {ADD_TODO, TOGGLE_TODO} from '../actions/todoActions';
+import axios from 'axios';
 
 const initialState = {
     todos : [
@@ -8,12 +9,43 @@ const initialState = {
     ]
 }
 
+// Performing asynchronous operations using createAsyncThunk() -->>
+
+export const getInitialStateAsync = createAsyncThunk("todo/getInitialState" , (arg , thunkAPI)=>{
+    axios.get("http://localhost:4100/api/todos")
+        .then(res =>
+           {
+              console.log(res.data);
+            //   dispatch(todoActions.setInitialState(res.data))
+            thunkAPI.dispatch(todoActions.setInitialState(res.data));
+           }
+      );
+})
+
+export const addTodoAsync = createAsyncThunk("todo/addTodo" ,async (payload)=>{
+        const response  = await fetch("http://localhost:4100/api/todos" , {
+            method : "POST",
+            headers : {
+                "content-type" : "application/json"
+            },
+            body : {
+                text : payload,
+                completed : false
+            }
+        })
+
+        return response.json();
+})
+
 // Creating reducer using Redux Toolkit -->>
 
 const todoSlice = createSlice({
     name : 'todo',
     initialState : initialState,
     reducers : {
+        setInitialState : (state,action) => {
+            state.todos = [...action.payload]
+        },
         addTodo : (state,action) =>{
              state.todos.push({
                 text : action.payload,
@@ -28,6 +60,12 @@ const todoSlice = createSlice({
                     return todo;
                 })
         }
+    },
+    extraReducers : (builder)=>{
+        builder.addCase(addTodoAsync.fulfilled , (state , action)=>{
+            console.log(action.payload);
+            state.todos.push(action.payload);
+        })
     }
 })
 
